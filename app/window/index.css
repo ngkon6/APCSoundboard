@@ -1,0 +1,145 @@
+:root {
+    --background: #333;
+    --foreground: #fff;
+    --foreground-empty: #555;
+    --overlay: #00000090;
+
+    --apc0: #000;
+    --apc3: #fff;
+    --apc8: #ffbd6c;
+    --apc5: #f00;
+    --apc9: #ff5400;
+    --apc13: #ff0;
+    --apc16: #88ff4c;
+    --apc17: #54ff00;
+    --apc21: #0f0;
+    --apc29: #0f5;
+    --apc37: #00a9ff;
+    --apc41: #05f;
+    --apc45: #00f;
+    --apc49: #5400ff;
+    --apc53: #f0f;
+    --apc57: #ff0054;
+    --apc4: #ff4c4c;
+    --apc12: #ffff4c;
+    --apc20: #4cff4c;
+    --apc36: #4cc3ff;
+    --apc52: #ff4cff;
+}
+
+body {
+    background-color: #333;
+    color: #fff;
+    font-family: sans-serif;
+    overflow: hidden;
+    user-select: none;
+}
+
+h1, h2, #overlay button {
+    font-family: CMG Sans, Arial, Helvetica, sans-serif;
+}
+
+body > h1 {
+    font-size: 3em;
+    margin-left: 8px;
+}
+h1 span {
+    color: transparent;
+    -webkit-text-stroke: 1.2px white;
+}
+
+#main {
+    display: flex;
+    justify-content: space-between;
+}
+
+#button-grid {
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+}
+#softkeys {
+    width: 15%;
+    height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+#button-grid div {
+    width: calc(70vw / 8);
+}
+#softkeys div {
+    width: 100%;
+}
+#button-grid div, #softkeys div {
+    height: fit-content;
+    overflow: clip;
+    white-space: nowrap;
+    text-align: center;
+    color: #555;
+    background-color: transparent;
+    border: 2px solid #555;
+    border-radius: 3px;
+    font: inherit;
+    padding: 20px 0;
+}
+#softkeys .softkey-active {
+    border: 2px solid lightgreen;
+    color: lightgreen;
+    cursor: pointer;
+}
+#softkeys .shift {
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+#info-label {
+    margin-left: 8px;
+}
+
+#color-selection {
+    display: none;
+    align-items: center;
+    justify-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 300px;
+    height: 230px;
+    padding: 12px;
+    background-color: var(--background);
+    border: 2px solid var(--foreground-empty);
+    border-radius: 12px;
+}
+#color-selection button {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+#color-selection button:hover {
+    border: 1px solid var(--foreground);
+}
+
+#overlay {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--overlay);
+    backdrop-filter: blur(4px);
+}
+#overlay #error-window {
+    position: absolute;
+    left: calc(50vw - 525px);
+    top: calc(50vh - 95px);
+    width: 1050px;
+    height: 190px;
+    font-size: 1.5em;
+    background-color: var(--background);
+    text-align: center;
+    border-radius: 8px;
+}

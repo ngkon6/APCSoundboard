@@ -1,0 +1,23 @@
+appId: nl.ngkon.apcsoundboard
+productName: APCSoundboard
+linux:
+  icon: app/icon.png
+  executableName: apcsoundboard
+  category: Application;Audio;
+  maintainer: ngkon
+  publish:
+  target:
+    - target: AppImage
+      arch:
+        - x64
+        - arm64
+    - target: deb
+      arch:
+        - x64
+        - arm64
+    - target: rpm
+      arch:
+        - x64
+        - arm64
+
+copyright: Copyright © ngkon | Licensed as free software (GPL-3.0 or later)
