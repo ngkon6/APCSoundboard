@@ -1,4 +1,4 @@
-import { ipcRenderer } from "electron";
+import { ipcRenderer, shell } from "electron";
 
 import Pad from "../class/Pad.js";
 import Softkey from "../class/Softkey.js";
@@ -131,6 +131,41 @@ const initiatePad = (pad) => {
     };
 };
 
+const overlay = {
+    /**
+     * Show the overlay, along with the specified window.
+     * @param {"error" | "update"} id
+     */
+    show: id => {
+        overlay.current = id;
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById(`${id}-window`).style.display = "block";
+    },
+    hide: () => {
+        overlay.current = "";
+        document.getElementById("overlay").style.display = "";
+        for (const w of document.querySelectorAll("#overlay > *")) w.style.display = "";
+    },
+    /** @type {"error" | "update"} */
+    current: ""
+};
+
+const checkForUpdates = (current) => {
+    if (overlay.current == "error") return;
+
+    fetch("https://api.github.com/repos/ILoveAndLikePizza/APCSoundboard/releases/latest").then(res => {
+        res.json().then(json => {
+            if (res.ok && json.tag_name > current) {
+                overlay.show("update");
+                document.querySelector("#update-window button").onclick = () => {
+                    overlay.hide();
+                    shell.openExternal("https://github.com/ILoveAndLikePizza/APCSoundboard/releases");
+                }
+            }
+        });
+    });
+};
+
 addEventListener("DOMContentLoaded", () => {
     state.change(state.NORMAL);
 
@@ -158,13 +193,16 @@ addEventListener("DOMContentLoaded", () => {
     }
     addEventListener("resize", setColorSelectorPosition);
 
-    ipcRenderer.on("pkg-version", (_e, ver) => document.querySelector("body > h1 span").textContent += ` v${ver}`);
+    ipcRenderer.on("pkg-version", (_e, ver) => {
+        checkForUpdates(ver);
+        document.querySelector("body > h1 span").textContent += ` v${ver}`
+    });
 
     ipcRenderer.on("shift-pressed", () => shiftPressed = true);
     ipcRenderer.on("shift-released", () => shiftPressed = false);
 
     ipcRenderer.on("apc-connect-failed", () => {
-        document.getElementById("overlay").style.display = "block";
+        overlay.show("error");
     });
 
     ipcRenderer.on("item-selected", (_e, path) => {
@@ -203,5 +241,7 @@ addEventListener("DOMContentLoaded", () => {
 
             state.change(state.NORMAL);
         }
+
+        if (overlay.current == "update") overlay.hide();
     });
 });

@@ -132,7 +132,8 @@ h1 span {
     background-color: var(--overlay);
     backdrop-filter: blur(4px);
 }
-#overlay #error-window {
+#overlay > * {
+    display: none;
     position: absolute;
     left: calc(50vw - 525px);
     top: calc(50vh - 95px);
@@ -142,4 +143,19 @@ h1 span {
     background-color: var(--background);
     text-align: center;
     border-radius: 8px;
+}
+#overlay #update-window {
+    height: 320px;
+    top: calc(50vh - 160px);
+}
+#overlay #update-window button {
+    background-color: transparent;
+    color: lightgreen;
+    border: 3px solid lightgreen;
+    font-size: 1.4em;
+    border-radius: inherit;
+    width: 90%;
+    padding: 16px 0;
+    margin-top: 25px;
+    cursor: pointer;
 }
