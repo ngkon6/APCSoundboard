@@ -60,9 +60,5 @@ app.whenReady().then(() => {
         });
 
         app.on("before-quit", () => apc.blackout());
-
-        setInterval(() => {
-            if (!APCMini.isConnected()) window.webContents.send("apc-connect-failed");
-        }, 2000);
     } else window.webContents.send("apc-connect-failed");
 });
