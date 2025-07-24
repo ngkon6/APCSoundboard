@@ -47,6 +47,12 @@ h1 span {
     color: transparent;
     -webkit-text-stroke: 1.2px white;
 }
+h1 sub {
+    vertical-align: bottom;
+    font-size: 28px;
+    margin-left: 32px;
+    color: #767676;
+}
 
 #main {
     display: flex;
