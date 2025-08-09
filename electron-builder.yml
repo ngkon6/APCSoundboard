@@ -3,7 +3,7 @@ productName: APCSoundboard
 linux:
   icon: app/icon.png
   executableName: apcsoundboard
-  category: Application;Audio;
+  category: Application;AudioVideo;
   maintainer: ngkon
   publish:
   target:
