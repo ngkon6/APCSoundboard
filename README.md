@@ -52,3 +52,8 @@ If you want to build the program for another package system or for another OS, y
 - Custom playback rates
 - Some purpose for the faders of the APC mini
 - Allowing multiple instances of one pad
+
+### Little extra thingy
+```bash
+node app/snake.js
+```

@@ -34,7 +34,8 @@ export default class APCMini extends EventEmitter {
         LIGHT_YELLOW: 12,
         LIGHT_GREEN: 20,
         LIGHT_BLUE: 36,
-        LIGHT_MAGENTA: 52
+        LIGHT_MAGENTA: 52,
+        RED_ORANGE: 60
     };
 
     static state = {
@@ -155,22 +156,25 @@ export default class APCMini extends EventEmitter {
         this.update();
     }
 
-    /** Synchronize the pads, track buttons and scene launch buttons to the actual device. */
-    update() {
+    /**
+     * Synchronize the pads, track buttons and scene launch buttons to the actual device.
+     * @param {boolean} force - whether to force update the APC Mini, regardless of the current pad state.
+     */
+    update(force = false) {
         for (let i=0; i<this.pads.length; i++) {
-            if (this.pads[i] != this.#lastPads[i]) {
+            if (this.pads[i] != this.#lastPads[i] || force) {
                 this.#output.send("noteon", {note: i, velocity: this.pads[i].color, channel: this.pads[i].state});
                 this.#lastPads[i] = this.#clone(this.pads[i]);
             }
         }
         for (let i=0; i<this.trackButtons.length; i++) {
-            if (this.trackButtons[i] != this.#lastTrackButtons[i]) {
+            if (this.trackButtons[i] != this.#lastTrackButtons[i] || force) {
                 this.#output.send("noteon", {note: i + 100, velocity: this.trackButtons[i], channel: 0});
                 this.#lastTrackButtons[i] = this.#clone(this.trackButtons[i]);
             }
         }
         for (let i=0; i<this.sceneLaunchButtons.length; i++) {
-            if (this.sceneLaunchButtons[i] != this.#lastSceneLaunchButtons[i]) {
+            if (this.sceneLaunchButtons[i] != this.#lastSceneLaunchButtons[i] || force) {
                 this.#output.send("noteon", {note: i + 112, velocity: this.sceneLaunchButtons[i], channel: 0});
                 this.#lastSceneLaunchButtons[i] = this.#clone(this.sceneLaunchButtons[i]);
             }
@@ -186,6 +190,6 @@ export default class APCMini extends EventEmitter {
         for (let tb in this.trackButtons) this.trackButtons[tb] = APCMini.buttonState.OFF;
         for (let slb in this.sceneLaunchButtons) this.sceneLaunchButtons[slb] = APCMini.buttonState.OFF;
 
-        this.update();
+        this.update(true);
     }
 };
