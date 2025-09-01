@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ILoveAndLikePizza/APCSoundboard.git"
+    "url": "git+https://github.com/ngkon6/APCSoundboard.git"
   },
   "keywords": [
     "apc",
@@ -20,9 +20,9 @@
   "author": "ngkon",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/ILoveAndLikePizza/APCSoundboard/issues"
+    "url": "https://github.com/ngkon6/APCSoundboard/issues"
   },
-  "homepage": "https://github.com/ILoveAndLikePizza/APCSoundboard#readme",
+  "homepage": "https://github.com/ngkon6/APCSoundboard#readme",
   "devDependencies": {
     "electron": "^37.2.3",
     "electron-builder": "^26.0.12"

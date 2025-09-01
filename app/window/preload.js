@@ -153,13 +153,13 @@ const overlay = {
 const checkForUpdates = (current) => {
     if (overlay.current == "error") return;
 
-    fetch("https://api.github.com/repos/ILoveAndLikePizza/APCSoundboard/releases/latest").then(res => {
+    fetch("https://api.github.com/repos/ngkon6/APCSoundboard/releases/latest").then(res => {
         res.json().then(json => {
             if (res.ok && json.tag_name > current) {
                 overlay.show("update");
                 document.querySelector("#update-window button").onclick = () => {
                     overlay.hide();
-                    shell.openExternal("https://github.com/ILoveAndLikePizza/APCSoundboard/releases");
+                    shell.openExternal("https://github.com/ngkon6/APCSoundboard/releases");
                 }
             }
         });
